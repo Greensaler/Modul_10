@@ -79,7 +79,7 @@ namespace Modul_10
 		private double firstValue, secondValue;
 		private string action;
 		ILogger Logger { get; }
-		public Calculator2(ILogger logger)
+		 public Calculator2(ILogger logger)
 		{
 			Logger = logger;
 		}
