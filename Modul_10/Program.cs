@@ -1,75 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
 
 namespace Modul_10
 {
+
+
 	class Program
 	{
+		static ILogger Logger { get; set; }
 		static void Main(string[] args)
 		{
-			Calculator calculator = new Calculator();
+			Logger = new Logger();
+			var calculator1 = new Calculator1(Logger);
+			var calculator2 = new Calculator2(Logger);
+			var calculator3 = new Calculator3(Logger);
+
+			calculator1.Work();
+			calculator2.Work();
+			calculator3.Work();
+
+			Console.ReadLine();
 		}
-		public class Calculator
+
+	}
+	public interface ILogger
+	{
+		void Event(string message);
+		void Error(string message);
+	}
+	public class Logger : ILogger
+	{
+		public void Error(string message)
 		{
-			private double firstValue, secondValue;
-			private string action;
-
-			public Calculator()
-			{
-				GetSetCalc();
-			}
-			private void GetSetCalc()
-			{
-				while (true)
-				{
-					Console.Clear();
-					try
-					{
-						Console.WriteLine("Введите число 1");
-						firstValue = double.Parse(Console.ReadLine());
-
-						Console.WriteLine("Введите число 2");
-						secondValue = double.Parse(Console.ReadLine());
-					}
-					catch (Exception ex)
-					{
-						Console.WriteLine(ex.Message);
-						Console.WriteLine("Некорректный ввод числа");
-						Console.ReadLine();
-						continue;
-					}
-
-					Console.WriteLine("Выберите операцию: '+' '-' '*' '/' ");
-					action = Console.ReadLine();
-
-					switch (action)
-					{
-						case "+":
-							Console.WriteLine($"Ответ:{ firstValue + secondValue}");
-							break;
-						case "-":
-							Console.WriteLine($"Ответ:{ firstValue - secondValue}");
-							break;
-						case "*":
-							Console.WriteLine($"Ответ:{firstValue * secondValue}");
-							break;
-						case "/":
-							if (secondValue == 0)
-							{
-								Console.WriteLine("На ноль делить нельзя");
-								Console.ReadLine();
-								continue;
-							}
-							else
-								Console.WriteLine($"Ответ:{firstValue / secondValue}");
-							break;
-						default:
-							Console.WriteLine("Ошибка! Неизвестное действие!");
-							break;
-					}
-					Console.ReadLine();
-				}
-			}
+			Console.BackgroundColor = ConsoleColor.Red;
+			Console.WriteLine(message);
 		}
+
+		public void Event(string message)
+		{
+			Console.BackgroundColor = ConsoleColor.Blue;
+			Console.WriteLine(message);
+		}
+	}
+	public interface IWork
+	{
+		void Work();
 	}
 }
 
