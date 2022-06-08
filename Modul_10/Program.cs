@@ -14,12 +14,12 @@ namespace Modul_10
 		{
 			Logger = new Logger();
 			var calculator1 = new Calculator1(Logger);
-			var calculator2 = new Calculator2(Logger);
-			var calculator3 = new Calculator3(Logger);
+			//var calculator2 = new Calculator2(Logger);
+			//var calculator3 = new Calculator3(Logger);
 
 			calculator1.Work();
-			calculator2.Work();
-			calculator3.Work();
+			//calculator2.Work();
+			//calculator3.Work();
 
 			Console.ReadLine();
 		}
